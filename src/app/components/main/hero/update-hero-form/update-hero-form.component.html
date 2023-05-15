@@ -1,0 +1,34 @@
+<div class="container-fluid form">
+    <h3>
+        Actualizar Usuario
+        <button class="close-form" (click)="closeForm()">X</button>
+    </h3>
+    <div class="alert alert-danger" role="alert" *ngIf="isUpdateFail">
+        {{errorMessage}}
+        <button class="close-alert" (click)="closeMessage()">X</button>
+    </div>
+    <div class="image" *ngIf="userProfile.userProfileImage">
+        <img class="hero-image" [src]="userProfile.userProfileImage" alt="Foto de perfil ">
+    </div>
+    <form class="custom-form" #f="ngForm" (ngSubmit)="updateUserProfile()" novalidate>
+        <label class="text-white" for="userProfileName"><b>Nombre</b></label>
+        <input type="text" placeholder="Ingrese el nombre" id="userProfileName" name="userProfileName"
+            [(ngModel)]="userProfile.userProfileName" required="required" (focus)="closeMessage()">
+        <label class="text-white" for="userProfileSurname"><b>Apellido</b></label>
+        <input type="text" placeholder="Ingrese la URL" id="userProfileSurname" name="userProfileSurname"
+            [(ngModel)]="userProfile.userProfileSurname" required="required" (focus)="closeMessage()">
+        <label class="text-white" for="userProfileTitle"><b>Titulo</b></label>
+        <input type="text" placeholder="Ingrese el titulo" id="userProfileTitle" name="userProfileTitle"
+            [(ngModel)]="userProfile.userProfileTitle" required="required" (focus)="closeMessage()">
+        <label class="text-white" for="userProfileAbout"><b>Descripción</b></label>
+        <input type="text" placeholder="Ingrese una descripción" id="userProfileAbout" name="userProfileAbout"
+            [(ngModel)]="userProfile.userProfileAbout" required="required" (focus)="closeMessage()">
+        <label class="text-white" for="userProfileImage"><b>Imagen</b></label>
+        <input class="text-white" type="file" id="userProfileImage" name="userProfileImage"
+            (change)="uploadUserProfileImage($event)" accept=".jpg, .jpeg, .png">
+        <div *ngIf="newImage">
+            <img class="hero-image" [src]="imageService.url" alt="Foto de perfil ">
+        </div>
+        <button>Actualizar usuario</button>
+    </form>
+</div>
